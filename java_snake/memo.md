@@ -6,18 +6,14 @@
 # Packages
 ## Controller
 - UserInput
-  - scan? buffer?
-  - 출력까지 할거면 둘 다 buffer
-  - read를 기다리고, 시간이 지나면 넘기기?
-  - 그냥 쭉 받다가 frame 넘어가면 초기화?
-  - ????
-  - 
+  - BufferReader에서 ready() 사용해서 넘기거나 입력 업데이트
 
 ## Model
 - GameObject
   - create
   - destroy
-  - pixels
+  - poses
+  - pixel
  
 - Snake -> GameObject
   - eat
