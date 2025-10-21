@@ -13,12 +13,11 @@ public class Loop {
     public synchronized void run() {
         // TODO: read configs & save data
         while (true) {
-            // TODO: add a log ... ? system message ... ?
             System.out.println(State.playState);
 
             // get user input
-            InputKeys userInput = UserInput.getInput();
-            System.out.println(userInput);
+            UserInput.getInput();
+            System.out.println(UserInput.lastInputKey);
 
             // process game logic
             // move snake
