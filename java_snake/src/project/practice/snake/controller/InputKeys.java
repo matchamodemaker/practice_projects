@@ -1,6 +1,6 @@
 package project.practice.snake.controller;
 
-public enum InputStates {
+public enum InputKeys {
     UP,
     DOWN,
     LEFT,

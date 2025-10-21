@@ -1,5 +1,8 @@
 package project.practice.snake.game;
 
+import project.practice.snake.controller.InputKeys;
+import project.practice.snake.controller.UserInput;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -12,9 +15,14 @@ public class Loop {
         while (true) {
             // TODO: add a log ... ? system message ... ?
             System.out.println(State.playState);
+
             // get user input
+            InputKeys userInput = UserInput.getInput();
+            System.out.println(userInput);
 
             // process game logic
+            // move snake
+            // create apple -> if there is no apple OR when destroyed?
 
             // status? - continue/terminate
             switch (State.playState) {
