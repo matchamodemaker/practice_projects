@@ -1,5 +1,7 @@
 package project.practice.snake.view;
 
+import project.practice.snake.model.Apple;
+import project.practice.snake.model.GameObject;
 import project.practice.snake.model.Snake;
 
 import java.io.BufferedWriter;
@@ -23,14 +25,14 @@ public class Board {
     private void initializeBoard() {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                board[i][j] = 'X';
+                board[i][j] = ' ';
             }
         }
     }
 
-    private void addSnake(Snake snake) {
-        for (int[] pos: snake.getPoses()) {
-            board[pos[0]][pos[1]] = snake.getPixel();
+    private void addGameObject(GameObject gameObject) {
+        for (int[] pos: gameObject.getPoses()) {
+            board[pos[0]][pos[1]] = gameObject.getPixel();
         }
     }
 
@@ -44,10 +46,11 @@ public class Board {
         bw.flush();
     }
 
-    public void drawBoard(Snake snake) {
+    public void drawBoard(Snake snake, Apple apple) {
         try {
             initializeBoard();
-            addSnake(snake);
+            addGameObject(snake);
+            addGameObject(apple);
             draw();
         } catch (IOException e) {
             throw new RuntimeException(e);

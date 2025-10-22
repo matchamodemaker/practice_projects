@@ -2,6 +2,7 @@ package project.practice.snake.game;
 
 import project.practice.snake.controller.InputKeys;
 import project.practice.snake.controller.UserInput;
+import project.practice.snake.model.Apple;
 import project.practice.snake.model.Snake;
 import project.practice.snake.view.Board;
 
@@ -27,6 +28,7 @@ public class Loop {
             // process game logic
             // move snake
             // create apple -> if there is no apple OR when destroyed?
+            Apple apple = new Apple('@');
 
             // status? - continue/terminate
             switch (State.playState) {
@@ -45,7 +47,7 @@ public class Loop {
             }
 
             // draw
-            board.drawBoard(snake);
+            board.drawBoard(snake, apple);
 
 
             try {
