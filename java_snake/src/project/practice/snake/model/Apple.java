@@ -17,6 +17,7 @@ public class Apple extends GameObject {
     }
 
     private int[] getNewRandomPos(List<int[]> poses) {
+        // TODO: change to compare the new pos with all game objects
         GameConfig gameConfig = GameConfig.getInstance();
 
         Random rand = new Random();

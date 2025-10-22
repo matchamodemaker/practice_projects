@@ -67,6 +67,9 @@ public class Snake extends GameObject {
         int[] head = this.getPoses().get(0);
 
         // TODO: check collision, oob
+        // wall -> OVER
+        // apple -> grow
+        // snake -> OVER
         this.addFirstPos(head[0] + delta[0], head[1] + delta[1]);
         this.removeLastPos();
     }

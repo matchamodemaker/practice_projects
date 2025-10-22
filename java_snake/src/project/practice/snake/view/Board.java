@@ -4,6 +4,7 @@ import project.practice.snake.GameConfig;
 import project.practice.snake.model.Apple;
 import project.practice.snake.model.GameObject;
 import project.practice.snake.model.Snake;
+import project.practice.snake.model.Wall;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -27,14 +28,7 @@ public class Board {
         board = new char[gameConfig.boardHeight][gameConfig.boardWidth];
         for (int i = 0; i < gameConfig.boardHeight; i++) {
             for (int j = 0; j < gameConfig.boardWidth; j++) {
-                if (i == gameConfig.boardHeight - 1
-                    || j == gameConfig.boardWidth - 1
-                    || i == 0
-                    || j == 0) {
-                    board[i][j] = gameConfig.wallChar;
-                } else {
-                    board[i][j] = ' ';
-                }
+                board[i][j] = ' ';
             }
         }
     }
@@ -55,11 +49,12 @@ public class Board {
         bw.flush();
     }
 
-    public void drawBoard(Snake snake, Apple apple) {
+    public void drawBoard(Snake snake, Apple apple, Wall wall) {
         try {
             initializeBoard();
             addGameObject(snake);
             addGameObject(apple);
+            addGameObject(wall);
             draw();
         } catch (IOException e) {
             throw new RuntimeException(e);
