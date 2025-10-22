@@ -1,14 +1,12 @@
 package project.practice.snake.game;
 
 import project.practice.snake.GameConfig;
-import project.practice.snake.controller.InputKeys;
 import project.practice.snake.controller.UserInput;
 import project.practice.snake.model.Apple;
 import project.practice.snake.model.Snake;
 import project.practice.snake.view.Board;
 
 import java.util.Timer;
-import java.util.TimerTask;
 
 public class Loop {
 
@@ -17,18 +15,18 @@ public class Loop {
 
     public synchronized void run() {
         GameConfig gameConfig = GameConfig.getInstance();
-        // TODO: read configs & save data
 
         Snake snake = new Snake(gameConfig.snakeChar);
         while (true) {
-            System.out.println(State.playState);
 
             // get user input
             UserInput.getInput();
-            System.out.println(UserInput.lastInputKey);
 
             // process game logic
             // move snake
+            snake.setDirection(UserInput.inputDirection);
+            snake.move();
+
             // create apple -> if there is no apple OR when destroyed?
             Apple apple = new Apple(gameConfig.appleChar, snake);
 
@@ -53,7 +51,6 @@ public class Loop {
 
 
             try {
-                // TODO: add config file to set the delay
                 this.wait(gameConfig.gameDelayMS);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);

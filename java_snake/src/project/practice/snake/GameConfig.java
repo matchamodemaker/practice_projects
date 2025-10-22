@@ -14,10 +14,14 @@ public class GameConfig {
     public int boardWidth = 30;
     public int boardHeight = 20;
 
-    public int gameDelayMS = 500;
+    public int gameDelayMS = 250;
 
-    public char snakeChar = '#';
-    public char appleChar = '@';
-    public char wallChar = 'X';
+    public final char snakeChar = '#';
+    public final char appleChar = '@';
+    public final char wallChar = 'X';
 
+    public static final char upKey = 'w';
+    public static final char downKey = 's';
+    public static final char leftKey = 'a';
+    public static final char rightKey = 'd';
 }

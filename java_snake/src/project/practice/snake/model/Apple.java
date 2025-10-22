@@ -3,21 +3,20 @@ package project.practice.snake.model;
 import project.practice.snake.GameConfig;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Apple extends GameObject {
 
-    // TODO: snake or snake poses?
     public Apple(char pixel, Snake snake) {
         super(pixel);
 
-        // TODO: use game config
         int[] poses = getNewRandomPos(snake.getPoses());
 
-        this.setPos(poses[0], poses[1]);
+        this.addPos(poses[0], poses[1]);
     }
 
-    private int[] getNewRandomPos(ArrayList<int[]> poses) {
+    private int[] getNewRandomPos(List<int[]> poses) {
         GameConfig gameConfig = GameConfig.getInstance();
 
         Random rand = new Random();

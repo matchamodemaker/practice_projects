@@ -7,6 +7,12 @@
 ## Controller
 - UserInput
   - BufferReader에서 ready() 사용해서 넘기거나 입력 업데이트
+  - 왜 방향 입력이 씹히지?
+  - 한 타이밍 늦게 들어가는데?
+  - input delay와 draw delay를 분리해야 할 것 같다.
+    - 어떻게?
+    - 쓰레드 분리하는 것 말고 방법이 있나?
+    - 
 
 ## Model
 - GameObject

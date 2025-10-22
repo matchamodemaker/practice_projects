@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 
 public class Board {
-    // TODO: add configs to set width and height
     private static GameConfig gameConfig;
     private static char[][] board;
 

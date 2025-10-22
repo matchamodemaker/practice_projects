@@ -1,5 +1,7 @@
 package project.practice.snake.controller;
 
+import project.practice.snake.GameConfig;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,26 +11,27 @@ public class UserInput {
             new InputStreamReader(System.in)
     );
 
-    public static InputKeys lastInputKey = InputKeys.UP;
+    public static Directions inputDirection = Directions.UP;
 
     public static void getInput() throws UserInputException {
         try {
             int v = 0;
-            if (br.ready()) {
+            while (br.ready()) {
                 v = br.read();
-                // TODO: add configs for WASD
-                switch (v) {
-                    case 'w', 'W':
-                        lastInputKey =  InputKeys.UP;
+                switch (Character.toLowerCase(v)) {
+                    case GameConfig.upKey:
+                        inputDirection =  Directions.UP;
                         break;
-                    case 'a', 'A':
-                        lastInputKey =  InputKeys.LEFT;
+                    case GameConfig.downKey:
+                        inputDirection =  Directions.DOWN;
                         break;
-                    case 's', 'S':
-                        lastInputKey =  InputKeys.DOWN;
+                    case GameConfig.leftKey:
+                        inputDirection =  Directions.LEFT;
                         break;
-                    case 'd', 'D':
-                        lastInputKey =  InputKeys.RIGHT;
+                    case GameConfig.rightKey:
+                        inputDirection =  Directions.RIGHT;
+                        break;
+                    default:
                         break;
                 }
             }
