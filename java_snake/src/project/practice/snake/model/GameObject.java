@@ -15,8 +15,8 @@ public class GameObject {
         return poses;
     }
 
-    public void setPos(int x, int y) {
-        poses.add(new int[]{x, y});
+    public void setPos(int r, int c) {
+        poses.add(new int[]{r, c});
     }
 
     public char getPixel() {

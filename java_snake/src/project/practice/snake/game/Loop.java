@@ -1,5 +1,6 @@
 package project.practice.snake.game;
 
+import project.practice.snake.GameConfig;
 import project.practice.snake.controller.InputKeys;
 import project.practice.snake.controller.UserInput;
 import project.practice.snake.model.Apple;
@@ -15,9 +16,10 @@ public class Loop {
     private static final Board board = new Board();
 
     public synchronized void run() {
+        GameConfig gameConfig = GameConfig.getInstance();
         // TODO: read configs & save data
 
-        Snake snake = new Snake('#');
+        Snake snake = new Snake(gameConfig.snakeChar);
         while (true) {
             System.out.println(State.playState);
 
@@ -28,7 +30,7 @@ public class Loop {
             // process game logic
             // move snake
             // create apple -> if there is no apple OR when destroyed?
-            Apple apple = new Apple('@');
+            Apple apple = new Apple(gameConfig.appleChar, snake);
 
             // status? - continue/terminate
             switch (State.playState) {
@@ -52,7 +54,7 @@ public class Loop {
 
             try {
                 // TODO: add config file to set the delay
-                this.wait(500);
+                this.wait(gameConfig.gameDelayMS);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
