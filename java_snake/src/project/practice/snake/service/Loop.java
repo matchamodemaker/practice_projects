@@ -3,17 +3,22 @@ package project.practice.snake.service;
 import project.practice.snake.config.Config;
 import project.practice.snake.controller.InputProvider;
 import project.practice.snake.model.Directions;
+import project.practice.snake.view.Board;
 
 public class Loop {
 
     private final Config config;
+    private final GameState gameState;
     private final GameEngine gameEngine;
     private final InputProvider inputProvider;
+    private final Board board;
 
-    public Loop(Config config, GameEngine gameEngine, InputProvider inputProvider) {
+    public Loop(Config config, GameState gameState, GameEngine gameEngine, InputProvider inputProvider, Board board) {
         this.config = config;
+        this.gameState = gameState;
         this.gameEngine = gameEngine;
         this.inputProvider = inputProvider;
+        this.board = board;
     }
 
     public synchronized void run() {
@@ -41,7 +46,7 @@ public class Loop {
             }
 
             // draw
-            gameEngine.drawBoard();
+            board.drawBoard(gameEngine.getScore(), gameState.getDrawObjects());
 
             try {
                 this.wait(config.getDelay(gameEngine.getScore()));

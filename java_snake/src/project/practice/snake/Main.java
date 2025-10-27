@@ -7,6 +7,7 @@ import project.practice.snake.service.GameEngine;
 import project.practice.snake.service.GameState;
 import project.practice.snake.service.DefaultGameEngine;
 import project.practice.snake.service.Loop;
+import project.practice.snake.view.Board;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,9 +15,11 @@ public class Main {
 
         GameState gameState = new GameState(config);
         GameEngine gameEngine = new DefaultGameEngine(gameState);
-        InputProvider inputProvider = new ConsoleInput(config);
 
-        Loop loop = new Loop(config, gameEngine, inputProvider);
+        InputProvider inputProvider = new ConsoleInput(config);
+        Board board = new Board(config);
+
+        Loop loop = new Loop(config, gameState, gameEngine, inputProvider, board);
 
         loop.run();
     }

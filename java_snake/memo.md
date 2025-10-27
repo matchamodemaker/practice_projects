@@ -27,3 +27,5 @@ Loop -> Draw -> GameObject
       - position, direction, speed?
 - separate input-draw threads
   - how?
+- add more states
+  - initial, playing, pause

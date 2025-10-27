@@ -10,7 +10,5 @@ public interface GameEngine {
 
     void moveSnake();
 
-    void drawBoard();
-
     void setSnakeDirection(Directions direction);
 }

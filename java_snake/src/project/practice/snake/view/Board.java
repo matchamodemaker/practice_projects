@@ -14,8 +14,6 @@ public class Board {
     private final Config config;
     private final BufferedWriter bw;
 
-    // TODO: separate board out of game state
-
     public Board(Config config) {
         this.config = config;
         this.bw = new BufferedWriter(new OutputStreamWriter(System.out));

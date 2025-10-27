@@ -4,7 +4,7 @@ public class Config {
     public final int boardWidth = 30;
     public final int boardHeight = 20;
 
-    public int gameDelayMS = 250;
+    public final int gameDelayMS = 250;
 
     public final char snakeChar = '#';
     public final char appleChar = '@';

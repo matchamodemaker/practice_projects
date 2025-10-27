@@ -6,9 +6,6 @@ import project.practice.snake.model.PlayState;
 import project.practice.snake.model.Pos;
 import project.practice.snake.model.object.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class DefaultGameEngine implements GameEngine {
 
     private final GameState gameState;
@@ -41,21 +38,12 @@ public class DefaultGameEngine implements GameEngine {
         if (wall.isColliding(nextPos) || snake.isColliding(nextPos)) {
             this.playState = PlayState.OVER;
         } else if (apple.isColliding(nextPos)) {
-            gameState.setApple(new Apple(config, snake.getPoses()));
+            gameState.setApple(new Apple(config, gameState.getDrawObjects()));
             this.score++;
         } else {
             snake.shrink();
         }
         snake.grow(nextPos);
-    }
-
-    @Override
-    public void drawBoard() {
-        List<GameObject> gameObjects = new ArrayList<>();
-        gameObjects.add(gameState.getSnake());
-        gameObjects.add(gameState.getApple());
-        gameObjects.add(gameState.getWall());
-        gameState.getBoard().drawBoard(score, gameObjects);
     }
 
     @Override
