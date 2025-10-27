@@ -1,7 +1,8 @@
-package project.practice.snake.model;
+package project.practice.snake.game.obj;
 
 import project.practice.snake.GameConfig;
 import project.practice.snake.controller.Directions;
+import project.practice.snake.game.model.SnakeMoveResult;
 
 import java.util.HashMap;
 
@@ -10,8 +11,8 @@ public class Snake extends GameObject {
     private HashMap<Directions, int[]> deltas;
 
 
-    public Snake(char pixel) {
-        super(pixel);
+    public Snake() {
+        super(GameConfig.snakeChar);
 
         deltas = new HashMap<>();
         deltas.put(Directions.UP, new int[]{-1, 0});
@@ -19,9 +20,8 @@ public class Snake extends GameObject {
         deltas.put(Directions.LEFT, new int[]{0, -1});
         deltas.put(Directions.RIGHT, new int[]{0, 1});
 
-        GameConfig gameConfig = GameConfig.getInstance();
-        int midHeight = gameConfig.boardHeight / 2;
-        int midWidth = gameConfig.boardWidth / 2;
+        int midHeight = GameConfig.boardHeight / 2;
+        int midWidth = GameConfig.boardWidth / 2;
 
         for (int i = 0; i < 3; i++) {
             this.addPos(midHeight + i, midWidth);
@@ -58,19 +58,39 @@ public class Snake extends GameObject {
         this.direction = direction;
     }
 
-    public void move() {
-        if (this.direction == null) {
-            return;
-        }
-
+    private int[] getNextPos() {
         int[] delta = deltas.get(this.direction);
         int[] head = this.getPoses().get(0);
 
-        // TODO: check collision, oob
-        // wall -> OVER
-        // apple -> grow
-        // snake -> OVER
-        this.addFirstPos(head[0] + delta[0], head[1] + delta[1]);
-        this.removeLastPos();
+        return new int[]{head[0] + delta[0], head[1] + delta[1]};
     }
+
+    public SnakeMoveResult move(Apple apple, Wall wall) {
+        if (this.direction == null) {
+            return SnakeMoveResult.PASS;
+        }
+
+        int[] nextPos = getNextPos();
+
+        // apple, wall, snake - nextpos
+        if (wall.isColliding(nextPos)) {
+            return SnakeMoveResult.WALL;
+        } else if (this.isColliding(nextPos)) {
+            return SnakeMoveResult.SNAKE;
+        }
+
+        if (apple.isColliding(nextPos)) {
+            this.addFirstPos(nextPos[0], nextPos[1]);
+            return SnakeMoveResult.APPLE;
+        } else {
+            this.addFirstPos(nextPos[0], nextPos[1]);
+            this.removeLastPos();
+            return SnakeMoveResult.PASS;
+        }
+    }
+
+    public void grow() {
+
+    }
+
 }

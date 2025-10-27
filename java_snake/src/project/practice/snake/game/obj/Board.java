@@ -1,17 +1,12 @@
-package project.practice.snake.view;
+package project.practice.snake.game.obj;
 
 import project.practice.snake.GameConfig;
-import project.practice.snake.model.Apple;
-import project.practice.snake.model.GameObject;
-import project.practice.snake.model.Snake;
-import project.practice.snake.model.Wall;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
 public class Board {
-    private static GameConfig gameConfig;
     private static char[][] board;
 
 
@@ -24,10 +19,9 @@ public class Board {
     }
 
     private void initializeBoard() {
-        gameConfig = GameConfig.getInstance();
-        board = new char[gameConfig.boardHeight][gameConfig.boardWidth];
-        for (int i = 0; i < gameConfig.boardHeight; i++) {
-            for (int j = 0; j < gameConfig.boardWidth; j++) {
+        board = new char[GameConfig.boardHeight][GameConfig.boardWidth];
+        for (int i = 0; i < GameConfig.boardHeight; i++) {
+            for (int j = 0; j < GameConfig.boardWidth; j++) {
                 board[i][j] = ' ';
             }
         }
@@ -42,7 +36,7 @@ public class Board {
     private void draw() throws IOException {
         bw.write("\033[H\033[2J");
         bw.flush();
-        for (int i = 0; i < gameConfig.boardHeight; i++) {
+        for (int i = 0; i < GameConfig.boardHeight; i++) {
             bw.write(board[i]);
             bw.write("\n");
         }

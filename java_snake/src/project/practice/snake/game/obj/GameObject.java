@@ -1,4 +1,4 @@
-package project.practice.snake.model;
+package project.practice.snake.game.obj;
 
 import java.util.LinkedList;
 
@@ -29,5 +29,14 @@ public class GameObject {
 
     public char getPixel() {
         return pixel;
+    }
+
+    public boolean isColliding(int[] targetPos) {
+        for (int[] pos: poses) {
+            if (pos[0] == targetPos[0] && pos[1] == targetPos[1]) {
+                return true;
+            }
+        }
+        return false;
     }
 }

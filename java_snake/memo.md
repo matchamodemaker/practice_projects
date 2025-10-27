@@ -67,4 +67,18 @@ internal?
     - best score, game state
     - snake, apple
       - position, direction, speed?
-      - 
+
+- View
+  - Draw
+- Controller
+  - UserInput 
+- Game
+  - GameSystem: check collision, run loop, return pixels
+    - GameObject
+      - Snake
+      - Apple
+      - Wall
+    - Board
+- Model
+  - Directions
+  - Exceptions ?
