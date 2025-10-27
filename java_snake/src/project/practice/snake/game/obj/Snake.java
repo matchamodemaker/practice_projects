@@ -2,29 +2,30 @@ package project.practice.snake.game.obj;
 
 import project.practice.snake.GameConfig;
 import project.practice.snake.controller.Directions;
+import project.practice.snake.game.model.Pos;
 import project.practice.snake.game.model.SnakeMoveResult;
 
 import java.util.HashMap;
 
 public class Snake extends GameObject {
     private Directions direction = null;
-    private HashMap<Directions, int[]> deltas;
+    private HashMap<Directions, Pos> deltas;
 
 
     public Snake() {
         super(GameConfig.snakeChar);
 
         deltas = new HashMap<>();
-        deltas.put(Directions.UP, new int[]{-1, 0});
-        deltas.put(Directions.DOWN, new int[]{1, 0});
-        deltas.put(Directions.LEFT, new int[]{0, -1});
-        deltas.put(Directions.RIGHT, new int[]{0, 1});
+        deltas.put(Directions.UP, new Pos(-1, 0));
+        deltas.put(Directions.DOWN, new Pos(1, 0));
+        deltas.put(Directions.LEFT, new Pos(0, -1));
+        deltas.put(Directions.RIGHT, new Pos(0, 1));
 
         int midHeight = GameConfig.boardHeight / 2;
         int midWidth = GameConfig.boardWidth / 2;
 
         for (int i = 0; i < 3; i++) {
-            this.addPos(midHeight + i, midWidth);
+            this.addPos(new Pos(midHeight + i, midWidth));
         }
     }
 
@@ -58,11 +59,11 @@ public class Snake extends GameObject {
         this.direction = direction;
     }
 
-    private int[] getNextPos() {
-        int[] delta = deltas.get(this.direction);
-        int[] head = this.getPoses().get(0);
+    private Pos getNextPos() {
+        Pos delta = deltas.get(this.direction);
+        Pos head = this.getPoses().get(0);
 
-        return new int[]{head[0] + delta[0], head[1] + delta[1]};
+        return new Pos(head.r() + delta.r(), head.c() + delta.c());
     }
 
     public SnakeMoveResult move(Apple apple, Wall wall) {
@@ -70,7 +71,7 @@ public class Snake extends GameObject {
             return SnakeMoveResult.PASS;
         }
 
-        int[] nextPos = getNextPos();
+        Pos nextPos = getNextPos();
 
         // apple, wall, snake - nextpos
         if (wall.isColliding(nextPos)) {
@@ -80,10 +81,10 @@ public class Snake extends GameObject {
         }
 
         if (apple.isColliding(nextPos)) {
-            this.addFirstPos(nextPos[0], nextPos[1]);
+            this.addFirstPos(nextPos);
             return SnakeMoveResult.APPLE;
         } else {
-            this.addFirstPos(nextPos[0], nextPos[1]);
+            this.addFirstPos(nextPos);
             this.removeLastPos();
             return SnakeMoveResult.PASS;
         }

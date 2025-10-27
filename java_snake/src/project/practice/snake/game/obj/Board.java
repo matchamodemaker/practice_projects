@@ -1,6 +1,7 @@
 package project.practice.snake.game.obj;
 
 import project.practice.snake.GameConfig;
+import project.practice.snake.game.model.Pos;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -28,8 +29,8 @@ public class Board {
     }
 
     private void addGameObject(GameObject gameObject) {
-        for (int[] pos : gameObject.getPoses()) {
-            board[pos[0]][pos[1]] = gameObject.getPixel();
+        for (Pos pos : gameObject.getPoses()) {
+            board[pos.r()][pos.c()] = gameObject.getPixel();
         }
     }
 

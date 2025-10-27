@@ -1,9 +1,11 @@
 package project.practice.snake.game.obj;
 
+import project.practice.snake.game.model.Pos;
+
 import java.util.LinkedList;
 
 public class GameObject {
-    private LinkedList<int[]> poses = new LinkedList<>();
+    private LinkedList<Pos> poses = new LinkedList<>();
     private char pixel;
 
 
@@ -11,16 +13,20 @@ public class GameObject {
         this.pixel = pixel;
     }
 
-    public LinkedList<int[]> getPoses() {
+    public LinkedList<Pos> getPoses() {
         return poses;
     }
 
-    public void addPos(int r, int c) {
-        poses.add(new int[]{r, c});
+    public void addPos(Pos pos) {
+        poses.add(pos);
     }
 
-    public void addFirstPos(int r, int c) {
-        poses.addFirst(new int[]{r, c});
+    public void addPos(int r, int c) {
+        poses.add(new Pos(r, c));
+    }
+
+    public void addFirstPos(Pos pos) {
+        poses.addFirst(pos);
     }
 
     public void removeLastPos() {
@@ -31,9 +37,9 @@ public class GameObject {
         return pixel;
     }
 
-    public boolean isColliding(int[] targetPos) {
-        for (int[] pos: poses) {
-            if (pos[0] == targetPos[0] && pos[1] == targetPos[1]) {
+    public boolean isColliding(Pos targetPos) {
+        for (Pos pos: poses) {
+            if (pos.r() == targetPos.r() && pos.c() == targetPos.c()) {
                 return true;
             }
         }
