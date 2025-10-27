@@ -15,6 +15,7 @@ public class GameSystem {
     public Wall wall = null;
     public Board board = null;
     public PlayState playState = PlayState.PAUSE;
+    public int score = 0;
 
     private static GameSystem instance = null;
 
@@ -22,7 +23,7 @@ public class GameSystem {
         instance = this;
 
         this.snake = new Snake();
-        this.apple = new Apple(this.snake);
+        this.apple = new Apple(this.snake.getPoses());
         this.wall = new Wall();
         this.board = new Board();
     }
@@ -41,12 +42,13 @@ public class GameSystem {
             this.playState = PlayState.OVER;
 
         } else if (result == SnakeMoveResult.APPLE) {
-            this.apple = new Apple(snake);
+            this.apple = new Apple(snake.getPoses());
+            this.score++;
         }
     }
 
     public void drawBoard() {
-        board.drawBoard(snake, apple, wall);
+        board.drawBoard(score, snake, apple, wall);
     }
 
 }

@@ -33,9 +33,14 @@ public class Board {
         }
     }
 
-    private void draw() throws IOException {
+    private void draw(int score) throws IOException {
         bw.write("\033[H\033[2J");
         bw.flush();
+        bw.write("Current score: " + score + "\n");
+        int d = GameConfig.gameDelayMS;
+        d -= score * 10;
+        if (d <= 100) { d = 100; }
+        bw.write("Current delay: " + d + "\n");
         for (int i = 0; i < GameConfig.boardHeight; i++) {
             bw.write(board[i]);
             bw.write("\n");
@@ -43,13 +48,13 @@ public class Board {
         bw.flush();
     }
 
-    public void drawBoard(Snake snake, Apple apple, Wall wall) {
+    public void drawBoard(int score, Snake snake, Apple apple, Wall wall) {
         try {
             initializeBoard();
             addGameObject(snake);
             addGameObject(apple);
             addGameObject(wall);
-            draw();
+            draw(score);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

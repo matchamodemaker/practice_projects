@@ -7,12 +7,12 @@ import java.util.Random;
 
 public class Apple extends GameObject {
 
-    public Apple(Snake snake) {
+    public Apple(List<int[]> snakePoses) {
         super(GameConfig.appleChar);
 
-        int[] poses = getNewRandomPos(snake.getPoses());
+        int[] nextPos = getNewRandomPos(snakePoses);
 
-        this.addPos(poses[0], poses[1]);
+        this.addPos(nextPos[0], nextPos[1]);
     }
 
     private int[] getNewRandomPos(List<int[]> poses) {
