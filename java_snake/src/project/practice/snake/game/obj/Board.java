@@ -6,10 +6,11 @@ import project.practice.snake.game.model.Pos;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.List;
 
 public class Board {
     private static char[][] board;
-    private GameConfig gameConfig;
+    private final GameConfig gameConfig;
 
 
     private static final BufferedWriter bw = new BufferedWriter(
@@ -40,10 +41,7 @@ public class Board {
         bw.write("\033[H\033[2J");
         bw.flush();
         bw.write("Current score: " + score + "\n");
-        int d = gameConfig.gameDelayMS;
-        d -= score * 10;
-        if (d <= 100) { d = 100; }
-        bw.write("Current delay: " + d + "\n");
+        bw.write("Current delay: " + gameConfig.getDelay(score) + "\n");
         for (int i = 0; i < gameConfig.boardHeight; i++) {
             bw.write(board[i]);
             bw.write("\n");
@@ -51,17 +49,16 @@ public class Board {
         bw.flush();
     }
 
-    public void drawBoard(int score, Snake snake, Apple apple, Wall wall) {
+    public void drawBoard(int score, List<GameObject> gameObjects) {
         try {
             initializeBoard();
-            addGameObject(snake);
-            addGameObject(apple);
-            addGameObject(wall);
+            for (GameObject gameObject : gameObjects) {
+                addGameObject(gameObject);
+            }
             draw(score);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-
 
 }

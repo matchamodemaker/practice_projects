@@ -3,19 +3,19 @@ package project.practice.snake.game;
 import project.practice.snake.GameConfig;
 import project.practice.snake.controller.Directions;
 import project.practice.snake.game.model.PlayState;
-import project.practice.snake.game.model.SnakeMoveResult;
-import project.practice.snake.game.obj.Apple;
-import project.practice.snake.game.obj.Snake;
-import project.practice.snake.game.obj.Wall;
-import project.practice.snake.game.obj.Board;
+import project.practice.snake.game.model.Pos;
+import project.practice.snake.game.obj.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameSystem {
 
-    private Snake snake;
+    private final Snake snake;
     private Apple apple;
-    private Wall wall;
-    private Board board;
-    private GameConfig gameConfig;
+    private final Wall wall;
+    private final Board board;
+    private final GameConfig gameConfig;
 
     public PlayState playState = PlayState.PAUSE;
     public int score = 0;
@@ -29,19 +29,25 @@ public class GameSystem {
     }
 
     public void moveSnake() {
-        SnakeMoveResult result = snake.move(apple, wall);
+        Pos nextPos = snake.getNextPos();
 
-        if (result == SnakeMoveResult.WALL || result == SnakeMoveResult.SNAKE) {
+        if (wall.isColliding(nextPos) || snake.isColliding(nextPos)) {
             this.playState = PlayState.OVER;
-
-        } else if (result == SnakeMoveResult.APPLE) {
+        } else if (apple.isColliding(nextPos)) {
             this.apple = new Apple(gameConfig, snake.getPoses());
             this.score++;
+        } else {
+            snake.shrink();
         }
+        snake.grow(nextPos);
     }
 
     public void drawBoard() {
-        board.drawBoard(score, snake, apple, wall);
+        List<GameObject> gameObjects = new ArrayList<>();
+        gameObjects.add(snake);
+        gameObjects.add(apple);
+        gameObjects.add(wall);
+        board.drawBoard(score, gameObjects);
     }
 
     public void setSnakeDirection(Directions direction) {

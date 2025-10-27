@@ -10,10 +10,10 @@ public class GameConfig {
     public final char appleChar = '@';
     public final char wallChar = 'X';
 
-    public static final char upKey = 'w';
-    public static final char downKey = 's';
-    public static final char leftKey = 'a';
-    public static final char rightKey = 'd';
+    public final char upKey = 'w';
+    public final char downKey = 's';
+    public final char leftKey = 'a';
+    public final char rightKey = 'd';
 
 
     public int getDelay(int score) {

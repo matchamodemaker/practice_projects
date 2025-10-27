@@ -3,13 +3,12 @@ package project.practice.snake.game.obj;
 import project.practice.snake.GameConfig;
 import project.practice.snake.controller.Directions;
 import project.practice.snake.game.model.Pos;
-import project.practice.snake.game.model.SnakeMoveResult;
 
 import java.util.HashMap;
 
 public class Snake extends GameObject {
     private Directions direction = null;
-    private HashMap<Directions, Pos> deltas;
+    private final HashMap<Directions, Pos> deltas;
 
 
     public Snake(GameConfig gameConfig) {
@@ -59,39 +58,19 @@ public class Snake extends GameObject {
         this.direction = direction;
     }
 
-    private Pos getNextPos() {
+    public Pos getNextPos() {
         Pos delta = deltas.get(this.direction);
         Pos head = this.getPoses().get(0);
 
         return new Pos(head.r() + delta.r(), head.c() + delta.c());
     }
 
-    public SnakeMoveResult move(Apple apple, Wall wall) {
-        if (this.direction == null) {
-            return SnakeMoveResult.PASS;
-        }
-
-        Pos nextPos = getNextPos();
-
-        // apple, wall, snake - nextpos
-        if (wall.isColliding(nextPos)) {
-            return SnakeMoveResult.WALL;
-        } else if (this.isColliding(nextPos)) {
-            return SnakeMoveResult.SNAKE;
-        }
-
-        if (apple.isColliding(nextPos)) {
-            this.addFirstPos(nextPos);
-            return SnakeMoveResult.APPLE;
-        } else {
-            this.addFirstPos(nextPos);
-            this.removeLastPos();
-            return SnakeMoveResult.PASS;
-        }
+    public void grow(Pos nextPos) {
+        this.addFirstPos(nextPos);
     }
 
-    public void grow() {
-
+    public void shrink() {
+        this.removeLastPos();
     }
 
 }

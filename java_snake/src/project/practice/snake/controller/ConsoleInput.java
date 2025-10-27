@@ -10,29 +10,28 @@ public class ConsoleInput {
     private static BufferedReader br = new BufferedReader(
             new InputStreamReader(System.in)
     );
+    private final GameConfig gameConfig;
 
     public static Directions inputDirection = Directions.UP;
+
+    public ConsoleInput(GameConfig gameConfig) {
+        this.gameConfig = gameConfig;
+    }
 
     public void getInput() throws UserInputException {
         try {
             int v = 0;
             while (br.ready()) {
                 v = br.read();
-                switch (Character.toLowerCase(v)) {
-                    case GameConfig.upKey:
-                        inputDirection =  Directions.UP;
-                        break;
-                    case GameConfig.downKey:
-                        inputDirection =  Directions.DOWN;
-                        break;
-                    case GameConfig.leftKey:
-                        inputDirection =  Directions.LEFT;
-                        break;
-                    case GameConfig.rightKey:
-                        inputDirection =  Directions.RIGHT;
-                        break;
-                    default:
-                        break;
+                v = Character.toLowerCase(v);
+                if (v == gameConfig.upKey) {
+                    inputDirection = Directions.UP;
+                } else if (v == gameConfig.downKey) {
+                    inputDirection = Directions.DOWN;
+                } else if (v == gameConfig.leftKey) {
+                    inputDirection = Directions.LEFT;
+                } else if (v == gameConfig.rightKey) {
+                    inputDirection = Directions.RIGHT;
                 }
             }
         } catch (IOException e) {

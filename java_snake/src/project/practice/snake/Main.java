@@ -9,8 +9,7 @@ public class Main {
         GameConfig gameConfig = new GameConfig();
 
         GameSystem gameSystem = new GameSystem(gameConfig);
-        ConsoleInput consoleInput = new ConsoleInput();
-
+        ConsoleInput consoleInput = new ConsoleInput(gameConfig);
 
         Loop loop = new Loop(gameConfig, gameSystem, consoleInput);
 

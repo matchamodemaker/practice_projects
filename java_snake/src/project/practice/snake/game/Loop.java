@@ -5,9 +5,9 @@ import project.practice.snake.controller.ConsoleInput;
 
 public class Loop {
 
-    private GameConfig gameConfig;
-    private GameSystem gameSystem;
-    private ConsoleInput consoleInput;
+    private final GameConfig gameConfig;
+    private final GameSystem gameSystem;
+    private final ConsoleInput consoleInput;
 
     public Loop(GameConfig gameConfig, GameSystem gameSystem, ConsoleInput consoleInput) {
         this.gameConfig = gameConfig;
