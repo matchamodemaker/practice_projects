@@ -6,14 +6,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class UserInput {
+public class ConsoleInput {
     private static BufferedReader br = new BufferedReader(
             new InputStreamReader(System.in)
     );
 
     public static Directions inputDirection = Directions.UP;
 
-    public static void getInput() throws UserInputException {
+    public void getInput() throws UserInputException {
         try {
             int v = 0;
             while (br.ready()) {

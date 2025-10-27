@@ -1,22 +1,27 @@
 package project.practice.snake.game;
 
 import project.practice.snake.GameConfig;
-import project.practice.snake.controller.UserInput;
-
-import java.util.concurrent.Delayed;
+import project.practice.snake.controller.ConsoleInput;
 
 public class Loop {
 
-    private static final GameSystem gameSystem = GameSystem.getInstance();
-    private int delay = GameConfig.gameDelayMS;
+    private GameConfig gameConfig;
+    private GameSystem gameSystem;
+    private ConsoleInput consoleInput;
+
+    public Loop(GameConfig gameConfig, GameSystem gameSystem, ConsoleInput consoleInput) {
+        this.gameConfig = gameConfig;
+        this.gameSystem = gameSystem;
+        this.consoleInput = consoleInput;
+    }
 
     public synchronized void run() {
         while (true) {
             // get user input
-            UserInput.getInput();
+            consoleInput.getInput();
 
             // move snake
-            gameSystem.snake.setDirection(UserInput.inputDirection);
+            gameSystem.setSnakeDirection(ConsoleInput.inputDirection);
             gameSystem.moveSnake();
 
             switch (gameSystem.playState) {
@@ -38,11 +43,7 @@ public class Loop {
             gameSystem.drawBoard();
 
             try {
-                delay = GameConfig.gameDelayMS - gameSystem.score * 20;
-                if (delay <= 100) {
-                    delay = 100;
-                }
-                this.wait(delay);
+                this.wait(gameConfig.getDelay(gameSystem.score));
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

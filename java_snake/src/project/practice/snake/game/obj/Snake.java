@@ -12,8 +12,8 @@ public class Snake extends GameObject {
     private HashMap<Directions, Pos> deltas;
 
 
-    public Snake() {
-        super(GameConfig.snakeChar);
+    public Snake(GameConfig gameConfig) {
+        super(gameConfig.snakeChar);
 
         deltas = new HashMap<>();
         deltas.put(Directions.UP, new Pos(-1, 0));
@@ -21,8 +21,8 @@ public class Snake extends GameObject {
         deltas.put(Directions.LEFT, new Pos(0, -1));
         deltas.put(Directions.RIGHT, new Pos(0, 1));
 
-        int midHeight = GameConfig.boardHeight / 2;
-        int midWidth = GameConfig.boardWidth / 2;
+        int midHeight = gameConfig.boardHeight / 2;
+        int midWidth = gameConfig.boardWidth / 2;
 
         for (int i = 0; i < 3; i++) {
             this.addPos(new Pos(midHeight + i, midWidth));

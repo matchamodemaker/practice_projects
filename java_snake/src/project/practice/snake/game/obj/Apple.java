@@ -8,15 +8,15 @@ import java.util.Random;
 
 public class Apple extends GameObject {
 
-    public Apple(List<Pos> snakePoses) {
-        super(GameConfig.appleChar);
+    public Apple(GameConfig gameConfig, List<Pos> snakePoses) {
+        super(gameConfig.appleChar);
 
-        Pos nextPos = getNewRandomPos(snakePoses);
+        Pos nextPos = getNewRandomPos(gameConfig, snakePoses);
 
         this.addPos(nextPos);
     }
 
-    private Pos getNewRandomPos(List<Pos> poses) {
+    private Pos getNewRandomPos(GameConfig gameConfig, List<Pos> poses) {
         // TODO: change to compare the new pos with all game objects
 
         Random rand = new Random();
@@ -26,8 +26,8 @@ public class Apple extends GameObject {
         int newWidthPos = 0;
         while (findNew) {
             findNew = false;
-            newHeightPos = rand.nextInt(1, GameConfig.boardHeight - 1);
-            newWidthPos = rand.nextInt(1, GameConfig.boardWidth - 1);
+            newHeightPos = rand.nextInt(1, gameConfig.boardHeight - 1);
+            newWidthPos = rand.nextInt(1, gameConfig.boardWidth - 1);
 
             for (Pos pos : poses) {
                 if (pos.r() == newWidthPos && pos.c() == newHeightPos) {
