@@ -1,8 +1,8 @@
-package project.practice.snake.game.obj;
+package project.practice.snake.model.object;
 
-import project.practice.snake.GameConfig;
-import project.practice.snake.controller.Directions;
-import project.practice.snake.game.model.Pos;
+import project.practice.snake.config.Config;
+import project.practice.snake.model.Directions;
+import project.practice.snake.model.Pos;
 
 import java.util.HashMap;
 
@@ -11,8 +11,8 @@ public class Snake extends GameObject {
     private final HashMap<Directions, Pos> deltas;
 
 
-    public Snake(GameConfig gameConfig) {
-        super(gameConfig.snakeChar);
+    public Snake(Config config) {
+        super(config.snakeChar);
 
         deltas = new HashMap<>();
         deltas.put(Directions.UP, new Pos(-1, 0));
@@ -20,8 +20,8 @@ public class Snake extends GameObject {
         deltas.put(Directions.LEFT, new Pos(0, -1));
         deltas.put(Directions.RIGHT, new Pos(0, 1));
 
-        int midHeight = gameConfig.boardHeight / 2;
-        int midWidth = gameConfig.boardWidth / 2;
+        int midHeight = config.boardHeight / 2;
+        int midWidth = config.boardWidth / 2;
 
         for (int i = 0; i < 3; i++) {
             this.addPos(new Pos(midHeight + i, midWidth));

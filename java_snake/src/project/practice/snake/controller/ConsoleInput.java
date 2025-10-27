@@ -1,6 +1,7 @@
 package project.practice.snake.controller;
 
-import project.practice.snake.GameConfig;
+import project.practice.snake.config.Config;
+import project.practice.snake.model.Directions;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,32 +11,33 @@ public class ConsoleInput {
     private static BufferedReader br = new BufferedReader(
             new InputStreamReader(System.in)
     );
-    private final GameConfig gameConfig;
+    private final Config config;
 
-    public static Directions inputDirection = Directions.UP;
+    private Directions inputDirection = Directions.UP;
 
-    public ConsoleInput(GameConfig gameConfig) {
-        this.gameConfig = gameConfig;
+    public ConsoleInput(Config config) {
+        this.config = config;
     }
 
-    public void getInput() throws UserInputException {
+    public Directions getInput() throws UserInputException {
         try {
             int v = 0;
             while (br.ready()) {
                 v = br.read();
                 v = Character.toLowerCase(v);
-                if (v == gameConfig.upKey) {
+                if (v == config.upKey) {
                     inputDirection = Directions.UP;
-                } else if (v == gameConfig.downKey) {
+                } else if (v == config.downKey) {
                     inputDirection = Directions.DOWN;
-                } else if (v == gameConfig.leftKey) {
+                } else if (v == config.leftKey) {
                     inputDirection = Directions.LEFT;
-                } else if (v == gameConfig.rightKey) {
+                } else if (v == config.rightKey) {
                     inputDirection = Directions.RIGHT;
                 }
             }
         } catch (IOException e) {
             throw new UserInputException(e.getMessage());
         }
+        return inputDirection;
     }
 }

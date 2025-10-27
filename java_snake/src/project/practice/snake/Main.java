@@ -1,17 +1,20 @@
 package project.practice.snake;
 
+import project.practice.snake.config.Config;
 import project.practice.snake.controller.ConsoleInput;
-import project.practice.snake.game.GameSystem;
-import project.practice.snake.game.Loop;
+import project.practice.snake.service.GameState;
+import project.practice.snake.service.GameSystem;
+import project.practice.snake.service.Loop;
 
 public class Main {
     public static void main(String[] args) {
-        GameConfig gameConfig = new GameConfig();
+        Config config = new Config();
 
-        GameSystem gameSystem = new GameSystem(gameConfig);
-        ConsoleInput consoleInput = new ConsoleInput(gameConfig);
+        GameState gameState = new GameState(config);
+        GameSystem gameSystem = new GameSystem(gameState);
+        ConsoleInput consoleInput = new ConsoleInput(config);
 
-        Loop loop = new Loop(gameConfig, gameSystem, consoleInput);
+        Loop loop = new Loop(config, gameSystem, consoleInput);
 
         loop.run();
     }

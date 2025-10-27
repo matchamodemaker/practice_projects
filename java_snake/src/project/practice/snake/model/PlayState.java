@@ -1,4 +1,4 @@
-package project.practice.snake.game.model;
+package project.practice.snake.model;
 
 public enum PlayState {
     INITIAL,

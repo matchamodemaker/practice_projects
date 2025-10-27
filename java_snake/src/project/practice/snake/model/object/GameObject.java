@@ -1,6 +1,6 @@
-package project.practice.snake.game.obj;
+package project.practice.snake.model.object;
 
-import project.practice.snake.game.model.Pos;
+import project.practice.snake.model.Pos;
 
 import java.util.LinkedList;
 

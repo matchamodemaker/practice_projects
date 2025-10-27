@@ -1,16 +1,17 @@
-package project.practice.snake.game;
+package project.practice.snake.service;
 
-import project.practice.snake.GameConfig;
+import project.practice.snake.config.Config;
 import project.practice.snake.controller.ConsoleInput;
+import project.practice.snake.model.Directions;
 
 public class Loop {
 
-    private final GameConfig gameConfig;
+    private final Config config;
     private final GameSystem gameSystem;
     private final ConsoleInput consoleInput;
 
-    public Loop(GameConfig gameConfig, GameSystem gameSystem, ConsoleInput consoleInput) {
-        this.gameConfig = gameConfig;
+    public Loop(Config config, GameSystem gameSystem, ConsoleInput consoleInput) {
+        this.config = config;
         this.gameSystem = gameSystem;
         this.consoleInput = consoleInput;
     }
@@ -18,13 +19,13 @@ public class Loop {
     public synchronized void run() {
         while (true) {
             // get user input
-            consoleInput.getInput();
+            Directions inputDirection = consoleInput.getInput();
 
             // move snake
-            gameSystem.setSnakeDirection(ConsoleInput.inputDirection);
+            gameSystem.setSnakeDirection(inputDirection);
             gameSystem.moveSnake();
 
-            switch (gameSystem.playState) {
+            switch (gameSystem.getPlayState()) {
                 case INITIAL:
                     break;
 
@@ -43,7 +44,7 @@ public class Loop {
             gameSystem.drawBoard();
 
             try {
-                this.wait(gameConfig.getDelay(gameSystem.score));
+                this.wait(config.getDelay(gameSystem.getScore()));
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

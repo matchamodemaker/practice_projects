@@ -1,4 +1,4 @@
-package project.practice.snake.controller;
+package project.practice.snake.model;
 
 public enum Directions {
     UP,

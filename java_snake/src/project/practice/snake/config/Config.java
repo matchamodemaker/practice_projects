@@ -1,6 +1,6 @@
-package project.practice.snake;
+package project.practice.snake.config;
 
-public class GameConfig {
+public class Config {
     public final int boardWidth = 30;
     public final int boardHeight = 20;
 

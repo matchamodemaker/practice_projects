@@ -1,22 +1,22 @@
-package project.practice.snake.game.obj;
+package project.practice.snake.model.object;
 
-import project.practice.snake.GameConfig;
-import project.practice.snake.game.model.Pos;
+import project.practice.snake.config.Config;
+import project.practice.snake.model.Pos;
 
 import java.util.List;
 import java.util.Random;
 
 public class Apple extends GameObject {
 
-    public Apple(GameConfig gameConfig, List<Pos> snakePoses) {
-        super(gameConfig.appleChar);
+    public Apple(Config config, List<Pos> snakePoses) {
+        super(config.appleChar);
 
-        Pos nextPos = getNewRandomPos(gameConfig, snakePoses);
+        Pos nextPos = getNewRandomPos(config, snakePoses);
 
         this.addPos(nextPos);
     }
 
-    private Pos getNewRandomPos(GameConfig gameConfig, List<Pos> poses) {
+    private Pos getNewRandomPos(Config config, List<Pos> poses) {
         // TODO: change to compare the new pos with all game objects
 
         Random rand = new Random();
@@ -26,8 +26,8 @@ public class Apple extends GameObject {
         int newWidthPos = 0;
         while (findNew) {
             findNew = false;
-            newHeightPos = rand.nextInt(1, gameConfig.boardHeight - 1);
-            newWidthPos = rand.nextInt(1, gameConfig.boardWidth - 1);
+            newHeightPos = rand.nextInt(1, config.boardHeight - 1);
+            newWidthPos = rand.nextInt(1, config.boardWidth - 1);
 
             for (Pos pos : poses) {
                 if (pos.r() == newWidthPos && pos.c() == newHeightPos) {
