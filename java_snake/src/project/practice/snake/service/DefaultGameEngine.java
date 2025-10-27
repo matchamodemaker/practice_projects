@@ -5,29 +5,31 @@ import project.practice.snake.model.Directions;
 import project.practice.snake.model.PlayState;
 import project.practice.snake.model.Pos;
 import project.practice.snake.model.object.*;
-import project.practice.snake.view.Board;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameSystem {
+public class DefaultGameEngine implements GameEngine {
 
     private final GameState gameState;
     private PlayState playState = PlayState.PAUSE;
     private int score = 0;
 
-    public GameSystem(GameState gameState) {
+    public DefaultGameEngine(GameState gameState) {
         this.gameState = gameState;
     }
 
+    @Override
     public PlayState getPlayState() {
         return playState;
     }
 
+    @Override
     public int getScore() {
         return score;
     }
 
+    @Override
     public void moveSnake() {
         Snake snake = gameState.getSnake();
         Wall wall = gameState.getWall();
@@ -47,6 +49,7 @@ public class GameSystem {
         snake.grow(nextPos);
     }
 
+    @Override
     public void drawBoard() {
         List<GameObject> gameObjects = new ArrayList<>();
         gameObjects.add(gameState.getSnake());
@@ -55,6 +58,7 @@ public class GameSystem {
         gameState.getBoard().drawBoard(score, gameObjects);
     }
 
+    @Override
     public void setSnakeDirection(Directions direction) {
         gameState.getSnake().setDirection(direction);
     }

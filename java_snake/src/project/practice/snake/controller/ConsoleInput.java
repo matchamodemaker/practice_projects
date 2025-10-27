@@ -7,7 +7,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class ConsoleInput {
+public class ConsoleInput implements InputProvider {
     private static BufferedReader br = new BufferedReader(
             new InputStreamReader(System.in)
     );
@@ -19,6 +19,7 @@ public class ConsoleInput {
         this.config = config;
     }
 
+    @Override
     public Directions getInput() throws UserInputException {
         try {
             int v = 0;

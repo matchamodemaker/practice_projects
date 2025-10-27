@@ -30,7 +30,7 @@ public class Apple extends GameObject {
             newWidthPos = rand.nextInt(1, config.boardWidth - 1);
 
             for (Pos pos : poses) {
-                if (pos.r() == newWidthPos && pos.c() == newHeightPos) {
+                if (pos.r() == newHeightPos && pos.c() == newWidthPos) {
                     findNew = true;
                     break;
                 }
